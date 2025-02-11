@@ -73,9 +73,7 @@ export default function CheckoutPage() {
       return;
     }
     
-
     try {
-      // Create a Stripe Checkout Session
       const response = await fetch("/api/create-checkout-session", {
         method: "POST",
         headers: {
@@ -245,7 +243,7 @@ export default function CheckoutPage() {
                 )}
               </div>
               <button
-                className="w-full h-12 rounded-lg bg-blue-600 text-white font-bold hover:bg-blue-700 transition-colors duration-200"
+                className="w-full h-12 rounded-full bg-gray-300 text-gray-800 font-bold hover:bg-gray-400 transition-colors duration-200"
                 onClick={handlePlaceOrder}
               >
                 Place Order
@@ -300,7 +298,7 @@ export default function CheckoutPage() {
                 </div>
               ))
             ) : (
-              <p className="text-sm text-gray-500">Your cart is empty.</p>
+              <p className="text-lg text-gray-500">Your cart is empty 🛒</p>
             )}
           </div>
         </div>

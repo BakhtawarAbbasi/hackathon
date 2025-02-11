@@ -71,7 +71,7 @@ const ProductSlider: React.FC = () => {
                         key={product._id}
                         className="flex-shrink-0 w-full sm:w-1/3 max-w-[400px] px-2 transition-all duration-300 cursor-pointer hover:scale-[1.02] hover:shadow-lg rounded-lg"
                     >
-                        <Link href={`/ProductDetails/${product.slug.current}`}>
+                        <Link href={`/productdetails/${product.slug.current}`}>
                             <div className="relative h-[400px] overflow-hidden rounded-lg">
                                 {product.image && (
                                     <Image

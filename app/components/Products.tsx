@@ -1,5 +1,4 @@
 "use client";
-
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
@@ -9,10 +8,13 @@ import { urlFor } from "@/sanity/lib/image";
 import { Product } from "@/types/products";
 import Swal from "sweetalert2";
 import { useCart } from "../context/CartContext";
+import { FaHeart } from "react-icons/fa";
+import { useWishlist } from "../context/WishlistContext"; // Import useWishlist
 
 const Products = () => {
   const [products, setProducts] = useState<Product[]>([]);
   const { addToCart } = useCart();
+  const { addToWishlist } = useWishlist(); // Use useWishlist
   const [showAll, setShowAll] = useState(false);
 
   useEffect(() => {
@@ -34,6 +36,20 @@ const Products = () => {
       timer: 1000,
     });
   };
+
+  const handleAddToWishlist = (e: React.MouseEvent, product: Product) => {
+    e.preventDefault();
+    e.stopPropagation(); // Prevent Link from navigating
+    addToWishlist(product);
+    Swal.fire({
+      position: "top-end",
+      icon: "success",
+      title: `${product.productName} added to wishlist`,
+      showConfirmButton: false,
+      timer: 1000,
+    });
+  };
+
   return (
     <div className="mx-8 px-4 py-8">
       <h1 className="text-3xl font-bold mb-6 text-gray-700">
@@ -48,13 +64,22 @@ const Products = () => {
             <Link href={`/productdetails/${product.slug.current}`}>
               <div className="relative overflow-hidden rounded-md">
                 {product.image && (
-                  <Image
-                    src={urlFor(product.image).url()}
-                    alt={product.productName}
-                    width={300}
-                    height={300}
-                    className="w-full object-cover rounded-md transform transition-transform duration-300 group-hover:scale-105"
-                  />
+                  <div className="relative">
+                    <Image
+                      src={urlFor(product.image).url()}
+                      alt={product.productName}
+                      width={300}
+                      height={300}
+                      className="w-full object-cover rounded-md transform transition-transform duration-300 group-hover:scale-105"
+                    />
+                    {/* Heart Icon */}
+                    <div
+                      className="absolute top-2 right-2 bg-white p-2 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 cursor-pointer"
+                      onClick={(e) => handleAddToWishlist(e, product)}
+                    >
+                      <FaHeart className="text-red-500" />
+                    </div>
+                  </div>
                 )}
               </div>
               <div className="mt-4 text-center">

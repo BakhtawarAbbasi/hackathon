@@ -10,10 +10,8 @@ import Swal from "sweetalert2";
 import { Product } from "@/types/products";
 
 export default function ProductPage() {
-  // Assert that the params object has a slug property.
   const { slug } = useParams() as { slug: string | string[] };
 
-  // If slug is an array, use  first element; otherwise use slug as a string.
   const slugStr: string = typeof slug === "string" ? slug : slug ? slug[0] : "";
 
   const [product, setProduct] = useState<Product | null>(null);

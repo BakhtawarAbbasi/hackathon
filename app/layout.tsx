@@ -4,6 +4,7 @@ import Footer from "./components/Footer";
 import { CartProvider } from "./context/CartContext";
 import TopNavbar from "./components/TopNavbar";
 import Navbar from "./components/Navbar";
+import { WishlistProvider } from "./context/WishlistContext";
 
 export const metadata: Metadata = {
   title: "E-commerce Hackaton",
@@ -18,12 +19,14 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
+      <WishlistProvider>
       <CartProvider>
         <TopNavbar/>
         <Navbar/>
         {children}
         <Footer/>
         </CartProvider>
+        </WishlistProvider>
       </body>
     </html>
   );

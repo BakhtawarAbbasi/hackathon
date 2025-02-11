@@ -4,12 +4,14 @@ import Image from "next/image";
 import Link from "next/link";
 import Searchbar from "./Searchbar";
 import { useCart } from "../context/CartContext";
+import { useWishlist } from "../context/WishlistContext"; // Import useWishlist
 import { FaShoppingCart, FaHeart } from "react-icons/fa";
 import { HiMenu, HiX } from "react-icons/hi";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { getCartCount } = useCart();
+  const { wishlist } = useWishlist(); // Use useWishlist
   const cartCount = getCartCount();
 
   const toggleMenu = () => {
@@ -41,10 +43,6 @@ const Navbar = () => {
         <Link href="/" className="hover:text-gray-500 transition-colors duration-200">
           Kids
         </Link>
-        <Link href="/" className="hover:text-gray-500 transition-colors duration-200">
-          Sale
-        </Link>
-        
       </div>
 
       {/* Right Side (Icons) */}
@@ -54,10 +52,15 @@ const Navbar = () => {
           <Searchbar />
         </div>
 
-        {/* Heart Icon */}
+        {/* Heart Icon with Count */}
         <Link href="/favorites">
           <div className="relative text-gray-800 hover:text-gray-500 transition-colors duration-200">
             <FaHeart className="text-2xl" />
+            {wishlist.length > 0 && (
+              <span className="absolute -top-2 -right-2 bg-red-500 text-white rounded-full text-xs w-5 h-5 flex items-center justify-center">
+                {wishlist.length}
+              </span>
+            )}
           </div>
         </Link>
 
@@ -99,10 +102,6 @@ const Navbar = () => {
             <Link href="/" className="hover:text-gray-500 transition-colors duration-200" onClick={toggleMenu}>
               Kids
             </Link>
-            <Link href="/" className="hover:text-gray-500 transition-colors duration-200" onClick={toggleMenu}>
-              Sale
-            </Link>
-           
           </div>
         </div>
       )}
