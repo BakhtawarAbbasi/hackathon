@@ -11,9 +11,9 @@ interface WishlistContextType {
 const WishlistContext = createContext<WishlistContextType | undefined>(undefined);
 
 export const WishlistProvider = ({ children }: { children: React.ReactNode }) => {
-  const [wishlist, setWishlist] = useState<any[]>([]);
+  const [wishlist, setWishlist] = useState<Product[]>([]);
 
-  const addToWishlist = (product: any) => {
+  const addToWishlist = (product: Product) => {
     setWishlist((prev) => {
       if (!prev.some((item) => item._id === product._id)) {
         return [...prev, product];
