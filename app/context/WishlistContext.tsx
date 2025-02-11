@@ -1,9 +1,10 @@
 "use client";
+import { Product } from "@/types/products";
 import React, { createContext, useContext, useState } from "react";
 
 interface WishlistContextType {
-  wishlist: any[];
-  addToWishlist: (product: any) => void;
+  wishlist: Product[];
+  addToWishlist: (product: Product) => void;
   removeFromWishlist: (productId: string) => void;
 }
 

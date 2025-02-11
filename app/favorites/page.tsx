@@ -6,13 +6,14 @@ import { urlFor } from "@/sanity/lib/image";
 import Swal from "sweetalert2";
 import { useWishlist } from "../context/WishlistContext";
 import { useCart } from "../context/CartContext";
+import { Product } from "@/types/products";
 
 const FavoritesPage = () => {
   const { wishlist, removeFromWishlist } = useWishlist();
   const { addToCart } = useCart();
 
   // Handle Add to Cart
-  const handleAddToCart = (e: React.MouseEvent, product: any) => {
+  const handleAddToCart = (e: React.MouseEvent, product: Product) => {
     e.preventDefault();
     addToCart(product);
     Swal.fire({
@@ -25,7 +26,7 @@ const FavoritesPage = () => {
   };
 
   // Handle Remove from Wishlist
-  const handleRemoveFromWishlist = (e: React.MouseEvent, product: any) => {
+  const handleRemoveFromWishlist = (e: React.MouseEvent, product: Product) => {
     e.preventDefault();
     removeFromWishlist(product._id);
     Swal.fire({
